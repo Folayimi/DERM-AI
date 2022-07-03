@@ -6,6 +6,8 @@ const Signin = () => {
     email: '',
     password: '',
   })
+  const [errorMessage, setErrorMessage] = useState('')
+  const [validating, setValidating] = useState(false)
   const handleInputChange = (e) => {
     const name = e.target.getAttribute('name')
     const value = e.target.value
@@ -13,7 +15,29 @@ const Signin = () => {
       return { ...fields, [name]: value }
     })
   }
-  const handleRegister = () => {}
+  const gotoDashboard = () => {}
+  //This sends the user email to the api. The api is expected to send the password related to the email
+  const handleSignin = async () => {
+    if (fields.email && fields.password) {
+      try {
+        const opts = {
+          method: 'POST',
+          header: { 'Content-Type': 'application/json' },
+          body: { email: fields.email },
+        }
+        const resp = await fetch('link-to-api/get-user-password', opts)
+        const response = await resp.json()
+        const password = response.password
+        if (password.trim() === fields.password.trim()) {
+          gotoDashboard(fields.email)
+        } else {
+          setErrorMessage('Invalid Email or Password!')
+        }
+      } catch (TypeError) {}
+    } else {
+      setValidating(true)
+    }
+  }
   return (
     <>
       <div className='regbg'>
@@ -63,6 +87,9 @@ const Signin = () => {
               defaultValue={fields.email}
               placeholder='Enter your email'
             />
+            {validating && !fields.email ? (
+              <p className='error'>Please Fill in this Field!</p>
+            ) : undefined}
           </div>
           <div>
             <input
@@ -72,10 +99,13 @@ const Signin = () => {
               placeholder='Enter your password'
               defaultValue={fields.password}
             />
+            {validating && !fields.password ? (
+              <p className='error'>Please Fill in this Field!</p>
+            ) : undefined}
           </div>
-
+          <p className='error'>{errorMessage}</p>
           <div>
-            <button className='loginbtn' onClick={handleRegister}>
+            <button className='loginbtn' onClick={handleSignin}>
               Login
             </button>
           </div>

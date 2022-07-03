@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Register.css'
+import Success from './Success'
 
 const Register = () => {
   const [fields, setFields] = useState({
@@ -9,6 +10,8 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   })
+  const [showSuccessPage, setShowSuccessPage] = useState(false)
+  const [validating, setValidating] = useState(false)
   const handleInputChange = (e) => {
     const name = e.target.getAttribute('name')
     const value = e.target.value
@@ -16,7 +19,38 @@ const Register = () => {
       return { ...fields, [name]: value }
     })
   }
-  const handleRegister = () => {}
+  useEffect(() => {
+    if (fields.confirmPassword) {
+      setValidating(true)
+    }
+  }, [fields.confirmPassword])
+  const handleRegister = async () => {
+    if (
+      fields.fullName &&
+      fields.email &&
+      fields.password &&
+      fields.confirmPassword
+    ) {
+      setShowSuccessPage(true)
+      setValidating(false)
+      // try {
+      //   const opts = {
+      //     method: 'POST',
+      //     header: { 'Content-Type': 'application/json' },
+      //     body: fields,
+      //   }
+
+      //   const resp = await fetch('link-to-api/add-user', opts)
+      //   const response = await resp.json()
+      //   const delivered = response.delivered
+      //   if (delivered) {
+      //     setShowSuccessPage(true)
+      //   }
+      // } catch (TypeError) {}
+    } else {
+      setValidating(true)
+    }
+  }
   return (
     <>
       <div className='regbg'>
@@ -44,6 +78,7 @@ const Register = () => {
             backgroundColor: 'rgba(0,0,255,0.6)',
           }}
         ></div>
+        {showSuccessPage ? <Success fields={fields} /> : undefined}
         <div className='inputcover' onChange={handleInputChange}>
           <div
             style={{
@@ -54,7 +89,7 @@ const Register = () => {
           >
             <p>
               <label style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
-                Welcome on board!
+                Welcome onboard!
               </label>
             </p>
             <p style={{ marginTop: '10px' }}>
@@ -64,10 +99,13 @@ const Register = () => {
           <div>
             <input
               className='input'
-              name='fullname'
+              name='fullName'
               defaultValue={fields.fullName}
               placeholder='Enter your full name'
             />
+            {validating && !fields.fullName ? (
+              <p className='error'>Please Fill in this Field!</p>
+            ) : undefined}
           </div>
           <div>
             <input
@@ -76,6 +114,9 @@ const Register = () => {
               defaultValue={fields.email}
               placeholder='Enter your email'
             />
+            {validating && !fields.email ? (
+              <p className='error'>Please Fill in this Field!</p>
+            ) : undefined}
           </div>
           <div>
             <input
@@ -85,15 +126,35 @@ const Register = () => {
               placeholder='Enter your password'
               defaultValue={fields.password}
             />
+            {validating && !fields.password ? (
+              <p className='error'>Please Fill in this Field!</p>
+            ) : undefined}
           </div>
           <div>
             <input
               className='input'
-              name='fullname'
+              name='confirmPassword'
               type='password'
               placeholder='Confirm Password'
-              defaultValue={fields.fullName}
+              defaultValue={fields.confirmPassword}
             />
+            {validating ? (
+              !fields.confirmPassword ? (
+                <p className='error'>{'Please Fill in this Field!'}</p>
+              ) : fields.password === fields.confirmPassword &&
+                fields.confirmPassword ? (
+                <p
+                  className='error'
+                  style={{
+                    color: 'lightgreen',
+                  }}
+                >
+                  {'Password Confirmed!'}
+                </p>
+              ) : (
+                <p className='error'>{'Passwords Do Not Match!'}</p>
+              )
+            ) : undefined}
           </div>
           <div>
             <button className='registerbtn' onClick={handleRegister}>

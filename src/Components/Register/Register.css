@@ -38,3 +38,9 @@
   border: solid rgba(0, 0, 250, 0.8) 2px;
   color: white;
 }
+.error {
+  color: red;
+  margin-top: 5px;
+  font-family: monospace;
+  font-weight: bold;
+}
