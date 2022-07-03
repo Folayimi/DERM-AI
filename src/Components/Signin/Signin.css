@@ -1,0 +1,38 @@
+.regbg {
+  background-color: rgb(245, 96, 121, 0.8);
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  align-items: center;
+  padding: auto;
+}
+
+.inpcover {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  text-align: center;
+  font-family: 'Corier New';
+  margin-top: 250px;
+}
+.input {
+  padding: 15px;
+  font-size: 1rem;
+  width: 300px;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 25px;
+}
+.loginbtn {
+  margin: 20px;
+  padding: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  cursor: pointer;
+  font-family: monospace;
+  background-color: rgba(0, 0, 250, 0.8);
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: solid rgba(0, 0, 250, 0.8) 2px;
+  color: white;
+}

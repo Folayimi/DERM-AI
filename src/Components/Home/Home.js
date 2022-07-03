@@ -15,11 +15,10 @@ const Home = ({ navRefList }) => {
   return (
     <>
       <div className='homebg'>
-        <div>
-          <Link to='/signin'>
-            <button className='signinbtn'>Sign in</button>
-          </Link>
+        <div style={{ margin: '30px' }}>
+          <label className='lg'>DERM AI</label>
         </div>
+
         <div className='content1'>
           <p>
             Strengthening efforts to reduce the cancer burden, improving the
