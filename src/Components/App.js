@@ -3,7 +3,8 @@ import '../App.css'
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
+import Register from './Register/Register'
+import Signin from './Signin/Signin'
 const App = () => {
   const [navRefList, setNavRefList] = useState([])
   return (
@@ -13,6 +14,12 @@ const App = () => {
           <Switch>
             <Route exact path='/'>
               <Home />
+            </Route>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/signin'>
+              <Signin />
             </Route>
             <Route path='/:id'>
               <Home />
