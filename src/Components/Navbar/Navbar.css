@@ -1,0 +1,130 @@
+.navbar {
+    justify-content: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    display: flex;
+    background-color: rgba(16, 17, 17, 0.8);
+    width: 100vw;
+    z-index: 1;
+  }
+  .navcover {
+    margin-left: auto;
+    margin-right: 250px;
+    gap: 50px;
+    font-weight: bolder;
+    display: flex;
+  }
+  .logo {
+    cursor: 'pointer';
+    background-color: white;
+    padding: 20px;
+    border-radius: 50%;
+    position: fixed;
+    top: 10px;
+    left: 20px;
+  }
+  .navitem {
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    font-family: 'Courier New';
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .navitem:hover {
+    color: white;
+  }
+  
+  .signin {
+    position: fixed;
+    top: 12px;
+    right: 20px;
+    padding: 5px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    border: solid lightgreen 2px;
+    height: fit-content;
+    width: 'fit-content';
+    border-radius: 10px;
+    font-family: 'Courier New';
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .signin:hover {
+    color: white;
+  }
+  .coverlabel {
+    margin: auto;
+    font-size: 2.3rem;
+    text-align: center;
+    padding: 10px;
+    padding-top: 300px;
+    text-shadow: white 0px 0px 9px;
+  }
+  .categoriescover {
+    flex-wrap: wrap;
+    display: flex;
+    margin: 0px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .categories {
+    display: block;
+    background-size: cover;
+    margin: 20px;
+    margin-top: 30px;
+    width: 280px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: black 0px 0px 10px;
+    cursor: pointer;
+  }
+  
+  .categories {
+    transition: 1s;
+  }
+  .categories:hover {
+    width: 320px;
+  }
+  @media only screen and (max-width: 800px) {
+    .coverlabel {
+      font-size: 1.6rem;
+      padding: 10px;
+      padding-top: 200px;
+    }
+    .signin {
+      position: relative;
+      margin: 20px;
+      width: max-content;
+    }
+    .logo {
+      position: relative;
+      padding: 20px;
+      width: fit-content;
+    }
+    .navbar {
+      padding: 30px;
+      display: block;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      width: 100px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      text-decoration: none;
+    }
+    .navcover {
+      display: block;
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 50px;
+    }
+    .navitem {
+      margin-top: 30px;
+    }
+  }
+  
