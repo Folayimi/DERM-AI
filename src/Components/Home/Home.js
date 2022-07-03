@@ -31,15 +31,7 @@ const Home = ({ navRefList }) => {
             <button className='startbtn'>GET STARTED</button>
           </Link>
         </div>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '0px',
-            justifyContent: 'center',
-          }}
-        >
-          <div className='dermimg'></div>
-        </div>
+        <div className='dermimg'></div>
       </div>
     </>
   )
