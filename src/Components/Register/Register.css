@@ -38,9 +38,31 @@
   border: solid rgba(0, 0, 250, 0.8) 2px;
   color: white;
 }
+.pdtosignin {
+  margin: 20px;
+  padding: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  cursor: pointer;
+  font-family: monospace;
+  background-color: rgba(0, 0, 250, 0.8);
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: solid rgba(0, 0, 250, 0.8) 2px;
+  color: white;
+}
 .error {
   color: red;
   margin-top: 5px;
   font-family: monospace;
   font-weight: bold;
+}
+.successpage{
+margin-top:300px;
+width:100%;
+height:100%;
+position:fixed;
+top:0px;
+left:0px;
+background-color:rba(255,255,255,0.9)
 }
