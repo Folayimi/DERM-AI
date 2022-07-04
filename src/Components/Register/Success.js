@@ -12,7 +12,7 @@ const Success = ({ fields }) => {
         </div>
         <div>
           <Link to='/signin'>
-            <button style='pdtosignin'>Proceed to Sign in</button>
+            <button className='pdtosignin'>Proceed to Sign in</button>
           </Link>
         </div>
       </div>

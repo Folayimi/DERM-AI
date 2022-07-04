@@ -137,6 +137,11 @@ const Register = () => {
               type='password'
               placeholder='Confirm Password'
               defaultValue={fields.confirmPassword}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleRegister()
+                }
+              }}
             />
             {validating ? (
               !fields.confirmPassword ? (

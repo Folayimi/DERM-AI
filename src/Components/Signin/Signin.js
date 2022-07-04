@@ -6,6 +6,7 @@ const Signin = () => {
     email: '',
     password: '',
   })
+  const [loginStatus, setLoginStatus] = useState('Sign in')
   const [errorMessage, setErrorMessage] = useState('')
   const [validating, setValidating] = useState(false)
   const handleInputChange = (e) => {
@@ -18,6 +19,7 @@ const Signin = () => {
   const gotoDashboard = () => {}
   //This sends the user email to the api. The api is expected to send the password related to the email
   const handleSignin = async () => {
+    setLoginStatus('Hold on...')
     if (fields.email && fields.password) {
       try {
         const opts = {
@@ -29,6 +31,7 @@ const Signin = () => {
         const response = await resp.json()
         const password = response.password
         if (password.trim() === fields.password.trim()) {
+          setLoginStatus('Signing in...')
           gotoDashboard(fields.email)
         } else {
           setErrorMessage('Invalid Email or Password!')
@@ -98,6 +101,11 @@ const Signin = () => {
               type='password'
               placeholder='Enter your password'
               defaultValue={fields.password}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSignin()
+                }
+              }}
             />
             {validating && !fields.password ? (
               <p className='error'>Please Fill in this Field!</p>
@@ -106,7 +114,7 @@ const Signin = () => {
           <p className='error'>{errorMessage}</p>
           <div>
             <button className='loginbtn' onClick={handleSignin}>
-              Login
+              {loginStatus}
             </button>
           </div>
           <p style={{ margin: '20px', color: 'white', fontSize: '1.1rem' }}>
