@@ -31,22 +31,22 @@ const Register = () => {
       fields.password &&
       fields.confirmPassword
     ) {
-      setShowSuccessPage(true)
+      fields.createdAt = Date.now()
       setValidating(false)
-      // try {
-      //   const opts = {
-      //     method: 'POST',
-      //     header: { 'Content-Type': 'application/json' },
-      //     body: fields,
-      //   }
+      try {
+        const opts = {
+          method: 'POST',
+          header: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(fields),
+        }
 
-      //   const resp = await fetch('link-to-api/add-user', opts)
-      //   const response = await resp.json()
-      //   const delivered = response.delivered
-      //   if (delivered) {
-      //     setShowSuccessPage(true)
-      //   }
-      // } catch (TypeError) {}
+        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
+        const response = await resp.json()
+        const delivered = response.delivered
+        if (delivered) {
+          setShowSuccessPage(true)
+        }
+      } catch (TypeError) {}
     } else {
       setValidating(true)
     }

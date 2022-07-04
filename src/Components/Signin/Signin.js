@@ -25,15 +25,17 @@ const Signin = () => {
         const opts = {
           method: 'POST',
           header: { 'Content-Type': 'application/json' },
-          body: { email: fields.email },
+          body: JSON.stringify({ email: fields.email }),
         }
-        const resp = await fetch('link-to-api/get-user-password', opts)
+        const resp = await fetch('http://localhost:3001/getpassList', opts)
         const response = await resp.json()
-        const password = response.password
+        console.log(response)
+        const password = await response.password
         if (password.trim() === fields.password.trim()) {
           setLoginStatus('Signing in...')
           gotoDashboard(fields.email)
         } else {
+          setLoginStatus('Sign in')
           setErrorMessage('Invalid Email or Password!')
         }
       } catch (TypeError) {}
