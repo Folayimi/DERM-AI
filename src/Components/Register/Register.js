@@ -175,7 +175,7 @@ const Register = () => {
               style={{ textDecoration: 'none', color: 'blue' }}
               to='/signin'
             >
-              <label>Sign in</label>
+              <label style={{cursor:'pointer'}}>Sign in</label>
             </Link>
           </p>
         </div>
