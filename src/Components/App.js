@@ -1,8 +1,8 @@
-import { React, useState, useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
 import '../App.css'
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Register from './Register/Register'
 import Signin from './Signin/Signin'
 const App = () => {
@@ -11,20 +11,12 @@ const App = () => {
     <>
       <div>
         <Router>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route path='/signin'>
-              <Signin />
-            </Route>
-            <Route path='/:id'>
-              <Home />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route exact path='/' element={<Home/>}/>             
+            <Route path='/register' element = {<Register/>}/>              
+            <Route path='/signin' element = {<Signin/>}/>              
+            <Route path='/:id' element = {<Home/>}/>              
+          </Routes>
         </Router>
       </div>
     </>

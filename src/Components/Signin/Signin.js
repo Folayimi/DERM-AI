@@ -27,7 +27,7 @@ const Signin = () => {
           header: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: fields.email }),
         }
-        const resp = await fetch('http://localhost:3001/getpassList', opts)
+        const resp = await fetch('http://127.0.0.1:5000/getpassList', opts)
         const response = await resp.json()
         console.log(response)
         const password = await response.password

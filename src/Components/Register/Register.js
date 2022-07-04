@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Register.css'
 import Success from './Success'
@@ -35,12 +35,15 @@ const Register = () => {
       setValidating(false)
       try {
         const opts = {
-          method: 'POST',
-          header: { 'Content-Type': 'application/json' },
+          method: 'POST',          
+          headers: { 
+            'Content-Type': 'application/json',
+            "X-Requested-With": "XMLHttpRequest"
+          },
           body: JSON.stringify(fields),
         }
 
-        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
+        const resp = await fetch('https://dermcorspass.herokuapp.com/https://git.heroku.com/dermaiapi.git/postUserDetails', opts)
         const response = await resp.json()
         const delivered = response.delivered
         if (delivered) {
