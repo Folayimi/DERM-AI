@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Register.css'
 import Success from './Success'
@@ -10,6 +10,7 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   })
+  const [registrationStatus, setRegistrationStatus] = useState('Sign up')
   const [showSuccessPage, setShowSuccessPage] = useState(false)
   const [validating, setValidating] = useState(false)
   const handleInputChange = (e) => {
@@ -25,25 +26,31 @@ const Register = () => {
     }
   }, [fields.confirmPassword])
   const handleRegister = async () => {
+    setRegistrationStatus('Hold on...')
     if (
       fields.fullName &&
       fields.email &&
       fields.password &&
       fields.confirmPassword
     ) {
-      fields.createdAt = Date.now()
+      const user = {
+        fullName: fields.fullName,
+        email: fields.email,
+        password: fields.password,
+        created: Date.now(),
+      }
+
+      console.log(user)
       setValidating(false)
+      setRegistrationStatus('Finishing up...')
       try {
         const opts = {
-          method: 'POST',          
-          headers: { 
-            'Content-Type': 'application/json',
-            "X-Requested-With": "XMLHttpRequest"
-          },
-          body: JSON.stringify(fields),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
         }
 
-        const resp = await fetch('https://dermcorspass.herokuapp.com/https://git.heroku.com/dermaiapi.git/postUserDetails', opts)
+        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
         const response = await resp.json()
         const delivered = response.delivered
         if (delivered) {
@@ -166,7 +173,7 @@ const Register = () => {
           </div>
           <div>
             <button className='registerbtn' onClick={handleRegister}>
-              Register
+              {registrationStatus}
             </button>
           </div>
           <p style={{ margin: '20px', color: 'white', fontSize: '1.1rem' }}>
@@ -175,7 +182,7 @@ const Register = () => {
               style={{ textDecoration: 'none', color: 'blue' }}
               to='/signin'
             >
-              <label style={{cursor:'pointer'}}>Sign in</label>
+              <label>Sign in</label>
             </Link>
           </p>
         </div>
