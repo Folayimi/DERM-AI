@@ -5,7 +5,7 @@ import * as tflite from '@tensorflow/tfjs-tflite'
 import Home from './Home'
 import Profile from './Profile'
 
-const Dashboard = ({ userId }) => {
+const Dashboard = ({ userId,files }) => {
   const [user, setUser] = useState({})
   const [menuClicked, setMenuClicked] = useState(false)
   const [homeClicked, setHomeClicked] = useState(false)
@@ -55,7 +55,7 @@ const Dashboard = ({ userId }) => {
 
 
 loadModel();
-/*
+
 // Function to classify image
 function classifyImage(model, image) {
   // Preprocess image
@@ -90,7 +90,7 @@ const fileInput = document.getElementById("file-input");
 const image = document.getElementById("image");
 
 function getImage() {
-  if (!fileInput.files[0]) throw new Error("Image not found");
+  if (!files[0]) throw new Error("Image not found");
   const file = fileInput.files[0];
 
   // Get the data url from the image
@@ -117,7 +117,7 @@ function getImage() {
       classifyImage(model, currImage);
     };
 
-    document.body.classList.add("image-loaded");
+    //document.body.classList.add("image-loaded");
   };
 
   // Get data url
@@ -126,7 +126,7 @@ function getImage() {
 
 // Add listener to see if someone uploads an image
 fileInput.addEventListener("change", getImage);
-*/
+
   },[])
   useEffect(() => {
     if (homeClicked) {
