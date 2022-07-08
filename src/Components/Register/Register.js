@@ -1,4 +1,3 @@
-import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Register.css'
 import Success from './Success'
@@ -50,7 +49,7 @@ const Register = () => {
           body: JSON.stringify(user),
         }
 
-        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
+        const resp = await fetch('https://dermaiapp.herokuapp.com/postUserDetails', opts)
         const response = await resp.json()
         const delivered = response.delivered
         if (delivered) {

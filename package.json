@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tensorflow/tfjs": "^3.18.0",
+    "@tensorflow/tfjs-tflite": "^0.0.1-alpha.8",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -26,6 +28,9 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "node": "^16.14.0"
   },
   "browserslist": {
     "production": [

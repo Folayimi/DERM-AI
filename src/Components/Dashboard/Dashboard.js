@@ -1,5 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import * as tf from '@tensorflow/tfjs'
+import * as tflite from '@tensorflow/tfjs-tflite'
 import Home from './Home'
 import Profile from './Profile'
 
@@ -33,9 +35,9 @@ const Dashboard = ({ userId }) => {
     console.log(tfliteModel);
 
     //  Check if model loaded
-    //if (tfliteModel) {
-    //model_status.innerText = "Model loaded";
-    //}
+    if (tfliteModel) {
+    console.log('model loaded')
+    }
   } catch (error) {
     console.log(error);
   }
@@ -148,7 +150,7 @@ fileInput.addEventListener("change", getImage);
         body: JSON.stringify(data),
       }
       console.log(data)
-      const resp = await fetch('http://localhost:3001/' + req, opts)
+      const resp = await fetch('https://dermaiapp.herokuapp.com/' + req, opts)
       const response = await resp.json()
       const user = response.user
       console.log(user)
