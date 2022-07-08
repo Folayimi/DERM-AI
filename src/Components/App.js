@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react'
+import Dashboard from './Dashboard/Dashboard'
 import '../App.css'
 import Navbar from './Navbar/Navbar'
 import Home from './Home/Home'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './Register/Register'
 import Signin from './Signin/Signin'
-import Dashboard from './Dashboard/Dashboard'
 const App = () => {
   const [navRefList, setNavRefList] = useState([])
   const [userId, setUserId] = useState(null)
