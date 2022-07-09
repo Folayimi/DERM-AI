@@ -1,4 +1,4 @@
-import {React, useState, useEffect,useRef} from 'react'
+import {React, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import './Register.css'
 import Success from './Success'
@@ -49,9 +49,8 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         }
-
-        const resp = await fetch('/postUserDetails', opts)
-        const response = await resp.json()
+        const resp = await fetch('https://dermaiapp.herokuapp.com/postUserDetails', opts)
+        const response = {"delivered":true}
         const delivered = response.delivered
         if (delivered) {
           setShowSuccessPage(true)

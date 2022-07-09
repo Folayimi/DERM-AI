@@ -17,7 +17,7 @@
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "https://dermaiapp.herokuapp.com",
+  "proxy":"https://dermaiapp.herokuapp.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

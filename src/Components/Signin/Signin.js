@@ -40,8 +40,15 @@ const Signin = ({ sendId }) => {
 
   //This sends the user email to the api. The api is expected to send the password related to the email
   const handleSignin = async () => {
-    setLoginStatus('Hold on...')
+    setLoginStatus('Hold on...')    
     if (fields.email && fields.password) {
+      if (password.trim() === fields.password.trim()) {
+        setLoginStatus('Signing in...')
+        setPassValidated(true)
+      } else {
+        setLoginStatus('Sign in')
+        setErrorMessage('Invalid Email or Password!')
+      }
       try {
         const opts = {
           method: 'POST',
