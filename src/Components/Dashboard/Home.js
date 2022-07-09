@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
 import './Dashboard.css'
 import logo from './Images/logo.png'
-const Home = ({ user }) => {
+const Home = ({ user, analyzeImage }) => {
   const imgRef = useRef(null)
   const [file, setFile] = useState(null)
   const [userImg, setUserImg] = useState('')
@@ -11,6 +11,7 @@ const Home = ({ user }) => {
     setFile(file)
     const url = URL.createObjectURL(file)
     setImgUrl(url)
+    analyzeImage(url)
     const imgSrc = Date.now() + file.name
     setUserImg(imgSrc)
     // studentInfo.img=imgSrc;

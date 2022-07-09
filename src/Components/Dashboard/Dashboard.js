@@ -5,7 +5,7 @@ import * as tflite from '@tensorflow/tfjs-tflite'
 import Home from './Home'
 import Profile from './Profile'
 
-const Dashboard = ({ userId,files }) => {
+const Dashboard = ({ userId, imgUrl }) => {
   const [user, setUser] = useState({})
   const [menuClicked, setMenuClicked] = useState(false)
   const [homeClicked, setHomeClicked] = useState(false)
@@ -25,23 +25,23 @@ const Dashboard = ({ userId,files }) => {
   var model; // This is in global scope
   const loadModel = async () => {
   	try {
-    		const tfliteModel = await tflite.loadTFLiteModel(
-      	// add the link to the model @habeeb 
-      // '/skin_cancer_detection_model_mobilenet.tflite'
-      'https://derm-img.s3.eu-west-1.amazonaws.com/skin_cancer_detection_model_mobilenet.tflite'
+      		const tfliteModel = await tflite.loadTFLiteModel(
+        	// add the link to the model @habeeb 
+        // '/skin_cancer_detection_model_mobilenet.tflite'
+        'https://derm-img.s3.eu-west-1.amazonaws.com/skin_cancer_detection_model_mobilenet.tflite'
 
-    );
-    model = tfliteModel; // assigning it to the global scope model as tfliteModel can only be used within this scope
-    console.log(tfliteModel);
+      );
+      model = tfliteModel; // assigning it to the global scope model as tfliteModel can only be used within this scope
+      console.log(tfliteModel);
 
-    //  Check if model loaded
-    if (tfliteModel) {
-    console.log('model loaded')
+      //  Check if model loaded
+      if (tfliteModel) {
+      console.log('model loaded')
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
   useEffect(()=>{
   	
 
@@ -51,87 +51,117 @@ const Dashboard = ({ userId,files }) => {
 //status.innerText = "Loaded TensorFlow.js - version:" + tf.version.tfjs;
 //}
 
- 
+   
 
 
-loadModel();
+    loadModel();
 
-// Function to classify image
-function classifyImage(model, image) {
-  // Preprocess image
-  image = tf.image.resizeBilinear(image, [256, 256]); // image size needs to be same as model inputs 
-  image = tf.expandDims(image);
-  console.log(image);
-  // console.log(model);
+    // Function to classify image
+    
 
-  // console.log(tflite.getDTypeFromTFLiteType("uint8")); // Gives int32 as output thus we cast int32 in below line
-  // console.log(tflite.getDTypeFromTFLiteType("uint8"));
-  console.log("converting image to different datatype...");
-  // image = tf.cast(image, "int32"); // Model requires uint8
-  console.log("model about to predict...");
-  const output = model.predict(image);
-  console.log("model done predicting");
-  const output_values = tf.softmax(output.arraySync()[0]);
-  console.log("Arg max:")
-  // console.log(output);
-  console.log(output_values.argMax().arraySync());
-  console.log("Output:")
-  // console.log(output.arraySync()); 
-  console.log(output.arraySync()[0]); // arraySync() Returns an array to use
+    // Image uploading
+    // const fileInput = document.getElementById("file-input");
+    // const image = document.getElementById("image");
 
-  // Update HTML
-  predicted_class.textContent = classes[output_values.argMax().arraySync()];
-  const max = output.max().arraySync() * 100
-  predicted_prob.textContent = max.toFixed(3) + "%";
-}
+   
 
-// Image uploading
-const fileInput = document.getElementById("file-input");
-const image = document.getElementById("image");
-
-function getImage() {
-  if (!files[0]) throw new Error("Image not found");
-  const file = fileInput.files[0];
-
-  // Get the data url from the image
-  const reader = new FileReader();
-
-  // When reader is ready display image
-  reader.onload = function(event) {
-    // Get data URL
-    const dataUrl = event.target.result;
-
-    // Create image object
-    const imageElement = new Image();
-    imageElement.src = dataUrl;
-
-    // When image object loaded
-    imageElement.onload = function() {
-      // Display image
-      image.setAttribute("src", this.src);
-
-      // Log image parameters
-      const currImage = tf.browser.fromPixels(imageElement);
-
-      // Classify image
-      classifyImage(model, currImage);
-    };
-
-    //document.body.classList.add("image-loaded");
-  };
-
-  // Get data url
-  reader.readAsDataURL(file);
-}
-
-// Add listener to see if someone uploads an image
-fileInput.addEventListener("change", getImage);
+    // Add listener to see if someone uploads an image
+    // fileInput.addEventListener("change", getImage);
 
   },[])
+  classifyImage=(model, image)=> {
+    // Preprocess image
+    image = tf.image.resizeBilinear(image, [256, 256]); // image size needs to be same as model inputs 
+    image = tf.expandDims(image);
+    console.log(image);
+    // console.log(model);
+
+    // console.log(tflite.getDTypeFromTFLiteType("uint8")); // Gives int32 as output thus we cast int32 in below line
+    // console.log(tflite.getDTypeFromTFLiteType("uint8"));
+    console.log("converting image to different datatype...");
+    // image = tf.cast(image, "int32"); // Model requires uint8
+    console.log("model about to predict...");
+    const output = model.predict(image);
+    console.log("model done predicting");
+    const output_values = tf.softmax(output.arraySync()[0]);
+    console.log("Arg max:")
+    // console.log(output);
+    console.log(output_values.argMax().arraySync());
+    console.log("Output:")
+    // console.log(output.arraySync()); 
+    console.log(output.arraySync()[0]); // arraySync() Returns an array to use
+
+    // Update HTML
+    console.log('Predicted class...')
+    console.log(classes[output_values.argMax().arraySync()]);
+    const max = output.max().arraySync() * 100
+    console.log('Predicted Prob...')
+    console.log(max.toFixed(3) + "%");
+  }
+  
+  const analyzeImage = (imgUrl) =>{
+    if (imgUrl!==undefined){
+      const imageElement = new Image();
+      imageElement.src = imgUrl;
+
+      // When image object loaded
+      imageElement.onload = function() {
+        // Display image
+        // image.setAttribute("src", this.src);
+
+        // Log image parameters
+        const currImage = tf.browser.fromPixels(imageElement);
+
+        // Classify image
+        classifyImage(model, currImage);
+      };
+    }
+  }
+  /*
+  const getImage = (file) => {
+    
+    // const file = fileInput.files[0];
+
+    // Get the data url from the image
+    // const reader = new FileReader();
+
+    // When reader is ready display image
+    reader.onload = (event)=> {
+      // Get data URL
+      const dataUrl = event.target.result;
+
+      // Create image object
+      const imageElement = new Image();
+      imageElement.src = dataUrl;
+
+      // When image object loaded
+      imageElement.onload = function() {
+        // Display image
+        // image.setAttribute("src", this.src);
+
+        // Log image parameters
+        const currImage = tf.browser.fromPixels(imageElement);
+
+        // Classify image
+        classifyImage(model, currImage);
+      };
+
+      //document.body.classList.add("image-loaded");
+    };
+
+    // Get data url
+    reader.readAsDataURL(file);
+  }*/
   useEffect(() => {
     if (homeClicked) {
       setYouClicked(false)
-      setView(<Home user={user} />)
+      setView(<Home user={user} 
+        analyzeImage={
+          (imgUrl)=>{
+            analyzeImage(imgUrl)
+          }
+        }
+      />)
     }
   }, [homeClicked])
   useEffect(() => {
