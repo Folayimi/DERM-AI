@@ -69,7 +69,7 @@ const Dashboard = ({ userId, imgUrl }) => {
     // fileInput.addEventListener("change", getImage);
 
   },[])
-  classifyImage=(model, image)=> {
+  const classifyImage=(model, image)=> {
     // Preprocess image
     image = tf.image.resizeBilinear(image, [256, 256]); // image size needs to be same as model inputs 
     image = tf.expandDims(image);
