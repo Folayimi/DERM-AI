@@ -5,6 +5,7 @@ import * as tflite from '@tensorflow/tfjs-tflite'
 import Home from './Home'
 import Profile from './Profile'
 
+tflite.setWasmPath('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite@0.0.1-alpha.8/dist/')
 const Dashboard = ({ userId, imgUrl }) => {
   const [user, setUser] = useState({})
   const [menuClicked, setMenuClicked] = useState(false)
@@ -25,21 +26,20 @@ const Dashboard = ({ userId, imgUrl }) => {
   var model; // This is in global scope
   const loadModel = async () => {
   	try {
-      		const tfliteModel = await tflite.loadTFLiteModel(
-        	// add the link to the model @habeeb 
-        // '/skin_cancer_detection_model_mobilenet.tflite'
-        'https://derm-img.s3.eu-west-1.amazonaws.com/skin_cancer_detection_model_mobilenet.tflite'
-
-      );
-      model = tfliteModel; // assigning it to the global scope model as tfliteModel can only be used within this scope
-      console.log(tfliteModel);
-
-      //  Check if model loaded
-      if (tfliteModel) {
-      console.log('model loaded')
-      }
+      console.log('fetching model..')
+      tflite.loadTFLiteModel('https://derm-img.s3.eu-west-1.amazonaws.com/skin_cancer_detection_model_mobilenet.tflite?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCWV1LXdlc3QtMyJGMEQCIDjQvjEa5YgEyap1pSBmXJJTPTlf%2B4J1VAFlocBr0W8RAiAvsJ%2BRkP1MM%2BdYSDVXwKFz%2F4TiUbMoK6DPE4fTDmluSyrkAggrEAAaDDMyOTY3NDE5MDQ2NCIMWiFXRFeav5qstEL2KsECPprqjCSm1irdpxCmAOtRTapchyUViZzj2tE%2B0N%2FHOifoDJvofcF%2FdAQbK7WAmegfn3nsIjEdgiBgLsDGG%2BHKadreFax26VU6jANoD8dt68QUcpmpbiFTIciJ%2B%2F%2FT8PdT8E9eqTQG7SSLjI5ojlWsmhF%2BQBMFllWwEUCOCcKhth%2BmVIGR0ojV3s0e5QGI%2BHqBK%2FQgMO4oEYGoZDsUnMr4W%2Bmw16EAXv5ERuh5WikSSkfsY6hnvCOAQJSeBnqkPFqUNBOqEvG0X1jvuYivrYRl%2B639uk7XHWvHaXGelqpOI%2FY98eFtLVKzgcle2i1w0YhkTVPuzPKf%2BFdKnNOZNSgLCncwFbpu11z5AZpu%2BL7ruwu8Dym3zjsluMo%2F0vezWFlIr7Q5%2F2IJLz8dP%2BxQTw5ZkWJ1fpegZFBSyjsHEyNIsDAqMMq8qpYGOrQCK%2BAAaBlnqaM3HgacLkE1coq85W0HISWvg%2BfHEJag0kvC%2Bhz1xPqEzI%2FcnzfO6wlRTHV%2BW1kiO5o7D0cUsO79zyk2mOXZZ3zpARAgyNrtuoAbsZkcCz1jyKwc9j7ZQhyFfUFbOKO95VehVVXnfHTigJF4v4wmd%2B%2Fo5kBcMtP%2FhbuI3CdHCykulhRH5j5biIoE%2FqqmTVCXFSp%2BO%2F8%2FE%2FK3zpUv5drv7gJChwiO7Ne8HYNKX16vVQtHDV1aZynikZyK2JLQLTRxdNFtW0tKUrKKC%2BvRMw48C2uDWVbpq%2FM5DIDSuYqfqibRVHukYce7EOL4tSkV7DyLHyheAHZSxkyOOdjQD29kwQxsngP6iIiWSGQ50TP1QVeIttYxgbQf%2BKdL5Rhi4f0lOa%2B6nVjPmg3SMiUpMpQ%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220710T094110Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAUZQQ452AH2FKUVS6%2F20220710%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Signature=9965944ea76c23df7b19784cb431c4945279cddba5cc43f971bef090bbc02bd4').then(async (tfliteModel)=>{
+        console.log('model fetched')
+        model = await tfliteModel; // assigning it to the global scope model as tfliteModel can only be used within this scope
+        console.log(model);
+        //  Check if model loaded
+        if (tfliteModel) {
+          console.log('model loaded')
+        }  
+      });
+       
+      
     } catch (error) {
-      console.log(error);
+      console.log('could not fetch error because '+error)
     }
   };
   useEffect(()=>{
@@ -180,7 +180,7 @@ const Dashboard = ({ userId, imgUrl }) => {
         body: JSON.stringify(data),
       }
       console.log(data)
-      const resp = await fetch('https://dermaiapp.herokuapp.com/' + req, opts)
+      const resp = await fetch('http://localhost:3001/' + req, opts)
       const response = await resp.json()
       const user = response.user
       console.log(user)

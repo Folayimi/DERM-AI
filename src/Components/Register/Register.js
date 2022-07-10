@@ -37,7 +37,7 @@ const Register = () => {
         fullName: fields.fullName,
         email: fields.email,
         password: fields.password,
-        created: Date.now(),
+        createdAt: Date.now(),
       }
 
       console.log(user)
@@ -49,7 +49,7 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         }
-        const resp = await fetch('https://dermaiapp.herokuapp.com/postUserDetails', opts)
+        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
         const response = {"delivered":true}
         const delivered = response.delivered
         if (delivered) {

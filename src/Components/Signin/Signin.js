@@ -48,7 +48,7 @@ const Signin = ({ sendId }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: fields.email }),
         }
-        const resp = await fetch('https://dermaiapp.herokuapp.com/getpassList', opts)
+        const resp = await fetch('http://localhost:3001/getpassList', opts)
         const response = await resp.json()
         console.log(response)
         const idVal = await response.id
