@@ -49,7 +49,7 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         }
-        const resp = await fetch('http://localhost:3001/postUserDetails', opts)
+        const resp = await fetch('/postUserDetails', opts)
         const response = {"delivered":true}
         const delivered = response.delivered
         if (delivered) {
