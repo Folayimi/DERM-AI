@@ -23,7 +23,7 @@ const Dashboard = ({ userId, imgUrl }) => {
 	5: "melanoma",
 	6: "vascular lesions"
   };
-  var model; // This is in a global scope
+  var model; // This is in global scope
   const loadModel = async () => {
   	try {
       console.log('fetching model..')
