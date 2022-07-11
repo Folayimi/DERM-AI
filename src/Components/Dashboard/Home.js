@@ -32,11 +32,11 @@ const Home = ({ user, analyzeImage }) => {
             margin: '20px',
             padding: '.5rem',
             fontWeight: 'bold',
-	    color:'white',
-	    backgroundColor:'rgba(250,90,81,1)',
-	    justifyContent: 'center',
-	    alignItem: 'center',
-	    border:'solid pink 2px', 
+      	    color:'white',
+      	    backgroundColor:'rgba(250,90,81,1)',
+      	    justifyContent: 'center',
+      	    alignItem: 'center',
+      	    border:'solid pink 2px', 
             borderRadius:'10px',
 	    
           }}
@@ -81,15 +81,16 @@ const Home = ({ user, analyzeImage }) => {
             <button
 
               style={{ 
-		backgroundColor: 'blue', 
-		color: 'white', 
-		padding:'1rem', 
-		paddingLeft:'1.5rem', 
-		paddingRight:'1.5rem',
-		margin:'.5rem',
-		fontSize:'1.2rem',
-		border:'solid blue 2px',
-		borderRadius:'2rem' }}
+            		backgroundColor: 'blue', 
+            		color: 'white', 
+            		padding:'1rem', 
+            		paddingLeft:'1.5rem', 
+            		paddingRight:'1.5rem',
+            		margin:'.5rem',
+            		fontSize:'1.2rem',
+            		border:'solid blue 2px',
+            		borderRadius:'2rem' 
+              }}
               title='Upload Image'
               type='submit'
               name='button'
