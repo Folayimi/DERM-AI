@@ -31,7 +31,7 @@ const Dashboard = ({ userId, imgUrl }) => {
       console.log('model fetched')
       model = await tfliteModel; // assigning it to the global scope model as tfliteModel can only be used within this scope
       console.log(model);
-      //  Check if model loaded
+      //  Checking if model loaded
       if (tfliteModel) {
         console.log('model loaded')
       }  
