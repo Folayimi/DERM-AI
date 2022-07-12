@@ -177,7 +177,7 @@ const Dashboard = ({ userId, imgUrl }) => {
         body: JSON.stringify(data),
       }
       console.log(data)
-      const resp = await fetch('/' + req, opts)
+      const resp = await fetch('https://dermaiserver.herokuapp.com/' + req, opts)
       const response = await resp.json()
       const user = response.user
       console.log(user)
